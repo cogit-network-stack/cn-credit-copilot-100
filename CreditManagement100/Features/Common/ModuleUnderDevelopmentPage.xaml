@@ -38,9 +38,21 @@
                     
                     <!-- Animated dots -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
-                        <Ellipse x:Name="Dot1" Width="12" Height="12" Fill="{ThemeResource PrimaryBrush}" Margin="4"/>
-                        <Ellipse x:Name="Dot2" Width="12" Height="12" Fill="{ThemeResource PrimaryLightBrush}" Margin="4"/>
-                        <Ellipse x:Name="Dot3" Width="12" Height="12" Fill="{ThemeResource Gray2Brush}" Margin="4"/>
+                        <Ellipse x:Name="Dot1" Width="12" Height="12" Fill="{ThemeResource PrimaryBrush}" Margin="4">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse x:Name="Dot2" Width="12" Height="12" Fill="{ThemeResource PrimaryLightBrush}" Margin="4">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+                        <Ellipse x:Name="Dot3" Width="12" Height="12" Fill="{ThemeResource Gray2Brush}" Margin="4">
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform/>
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
                         
                         <StackPanel.Resources>
                             <Storyboard x:Name="BounceDotsStoryboard" RepeatBehavior="Forever">
@@ -69,11 +81,6 @@
                                     BeginTime="0:0:0.4"/>
                             </Storyboard>
                         </StackPanel.Resources>
-                        
-                        <!-- Set transform for dots -->
-                        <Ellipse.RenderTransform>
-                            <TranslateTransform/>
-                        </Ellipse.RenderTransform>
                     </StackPanel>
                     
                     <!-- Module title and message -->
