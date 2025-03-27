@@ -1,7 +1,9 @@
+using CreditManagement100.Features.Common;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CreditManagement100.Features.Common
 {
@@ -12,7 +14,7 @@ namespace CreditManagement100.Features.Common
         public ModuleUnderDevelopmentPage()
         {
             this.InitializeComponent();
-            ViewModel = App.Current.Services.GetService<ModuleUnderDevelopmentViewModel>();
+            ViewModel = ((App)Application.Current).GetService<ModuleUnderDevelopmentViewModel>();
 
             // Start animations when page loads
             this.Loaded += ModuleUnderDevelopmentPage_Loaded;
@@ -37,5 +39,22 @@ namespace CreditManagement100.Features.Common
                 ViewModel.ModuleName = moduleName;
             }
         }
+    }
+}
+
+internal class App : Application
+{
+    public IServiceProvider Services { get; private set; }
+
+    public App()
+    {
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+        Services = serviceCollection.BuildServiceProvider();
+    }
+
+    private void ConfigureServices(IServiceCollection services)
+    {
+        services.AddSingleton<ModuleUnderDevelopmentViewModel>();
     }
 }
