@@ -87,12 +87,10 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- User Icon -->
-                <Ellipse Grid.Column="0" Width="32" Height="32" Fill="{ThemeResource PrimaryLightBrush}">
-                    <Ellipse.OpacityMask>
-                        <ImageBrush ImageSource="/Assets/user_icon.png"/>
-                    </Ellipse.OpacityMask>
-                </Ellipse>
+                <!-- User Icon - Remplacer OpacityMask par un FontIcon plus simple -->
+                <Grid Grid.Column="0" Width="32" Height="32" Background="{ThemeResource PrimaryLightBrush}" CornerRadius="16">
+                    <FontIcon Glyph="&#xE77B;" FontSize="16" Foreground="White"/>
+                </Grid>
 
                 <!-- User Name and Role -->
                 <StackPanel 
