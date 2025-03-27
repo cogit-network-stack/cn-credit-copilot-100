@@ -2,13 +2,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media;
 using System;
-using Windows.UI;
 
 namespace CreditManagement100
 {
     public partial class App : Application
     {
         private IServiceProvider _serviceProvider;
+
+        public static App CurrentApp => (App)Current;
+        public IServiceProvider Services => _serviceProvider;
 
         public App()
         {
@@ -41,11 +43,19 @@ namespace CreditManagement100
         }
     }
 
+    // Extensions utilitaires
+    public static class ServiceProviderExtensions
+    {
+        public static T GetService<T>(this IServiceProvider provider) where T : class
+        {
+            return provider.GetRequiredService<T>();
+        }
+    }
+
     // ViewModels
     public class ShellViewModel
     {
-        // Supprimer _selectedNavigationIndex ou l'utiliser
-        public int SelectedNavigationIndex { get; set; }
+        public int NavigationIndex { get; set; }
     }
 
     public class ModuleUnderDevelopmentViewModel { }
@@ -53,26 +63,17 @@ namespace CreditManagement100
     public class LoginViewModel { }
     public class DashboardViewModel { }
 
-    // Extensions utilitaires
-    public static class ServiceProviderExtensions
+    // Utilitaire de gestion des couleurs
+    public static class ColorHelper
     {
-        public static T GetRequiredService<T>(this IServiceProvider provider) where T : class
-        {
-            return provider.GetRequiredService<T>();
-        }
-    }
-
-    // Ajout des extensions de couleurs
-    public static class ColorExtensions
-    {
-        public static Color ToColor(this string hexColor)
+        public static Microsoft.UI.Color ToMicrosoftColor(string hexColor)
         {
             hexColor = hexColor.Replace("#", "");
-            return Color.FromArgb(
+            return Microsoft.UI.Color.FromArgb(
+                255,
                 Convert.ToByte(hexColor.Substring(0, 2), 16),
                 Convert.ToByte(hexColor.Substring(2, 2), 16),
-                Convert.ToByte(hexColor.Substring(4, 2), 16),
-                255
+                Convert.ToByte(hexColor.Substring(4, 2), 16)
             );
         }
     }
